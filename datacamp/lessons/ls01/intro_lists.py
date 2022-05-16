@@ -13,7 +13,7 @@ months[2:5]
 
 months[3:]
 # ["April", "May", "June"]
-# Begins subset at March, does not end (goes to end of specified list)
+# Begins subset at April, does not end (goes to end of specified list)
 
 months[:3]
 # ["January", "February", "March"]
