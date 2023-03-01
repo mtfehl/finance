@@ -1,4 +1,5 @@
-# Get lists of data for S&P 500 companies - daily returns, volatility, etc
+# Get lists of data for S&P 500 companies - daily returns, volatility, etc, make them readable through CSV
+
 # Look into making the list a continuous one (without needing to constantly update it)
 # Create a main() function list
 # Create an graph input where the user types in a ticker, and can see an associated graph to the ticker
