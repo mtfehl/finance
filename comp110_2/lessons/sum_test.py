@@ -1,0 +1,22 @@
+"""Tests for the sum function."""
+
+
+from comp110_2.lessons.sum import sum
+
+
+def test_sum_empty() -> None:
+    xs: list[float] = []
+    assert sum(xs) == 0.0
+
+#in terminal: python -m pytest comp110_2/lessons/sum_test
+
+def test_sum_single_item() -> None:
+    assert sum([110.0]) == 110.0
+
+def test_sum_many_items() -> None:
+    xs: list[float] = [1.0, 2.0, 3.0]
+    assert sum(xs) == 6.0
+
+def test_sum_negative_items() -> None:
+   xs: list[float] = [-1.0, 2.0, -2.0]
+   assert sum(xs) == -1.0
