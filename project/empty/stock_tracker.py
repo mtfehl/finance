@@ -3,6 +3,8 @@ ticker: str = input("Enter a ticker: ")
 # If ticket DNE, return error
 # Import stock data of all available tickers & their associated data, using CSV readers and jupyter notebook
 # We need to determine what information is relevant to a prospective investor
+def read_stock_csv
+
 
 # Stage 2: given multiple inputted tickets, we can evaluate them side-by-side and determine which is better
 # Pull up both their relevant statistics & say which has "better" values (relatively higher or lower),
