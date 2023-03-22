@@ -116,7 +116,10 @@ def stock_data(tickers: list[str]) -> None:
             corr = pearson_correlation(stock_data[ticker1], stock_data[ticker2])
             correlations_df.at[ticker1, ticker2] = corr
             correlations_df.at[ticker2, ticker1] = corr
-
+            # min_var_port(ticker1, ticker2)
+            # print(min_var_port)
+            # cov = covariance(ticker1, ticker2)
+            # print(cov)
 
     # display the DataFrame
     print("CORRELATION BETWEEN THE SECURITES")
@@ -126,7 +129,6 @@ def stock_data(tickers: list[str]) -> None:
 def build() -> None:
     risk_pref: str = input("What is your risk preference? (low, medium, or high): ")
     # invest_amnt: str = input("How much would you like to invest? ")
-
 
     # for all portfolios: create a function that is first called that would group only very low corr stocks together (less than 0.3)
     # 
@@ -157,15 +159,15 @@ def expected_return(x) -> float:
 
 def standard_deviation(x) -> float:
     end_date = dt.now().strftime('%Y-%m-%d')
-    ticker_data = yf.download(x, start='2020-01-01', end=end_date, progress=False)
-    sd = np.std(ticker_data['Close'])
-    return sd
+    ticker_data = yf.download(x, period="max", end=end_date, progress=False)
+    sd = np.std(ticker_data['Adj Close'])
+    return sd / 100 
 
 def sharpe_ratio(x) -> float:
     """Calculates the sharpe ratio of a stock (or a portfolio) given its SD and E(R)."""
     er = expected_return(x)
     risk_free_rate = 0.0441
-    sd = standard_deviation(x)/100
+    sd = standard_deviation(x)
     return (er - risk_free_rate)/sd
 
 def pearson_correlation(x, y):
@@ -181,12 +183,18 @@ def pearson_correlation(x, y):
     return num / denom
 
 def covariance(x, y) -> float:
-    """Calculates the covariance of two securities given their standard deviation."""
-    corr = pearson_correlation(x, y)
-    cov = corr * (standard_deviation(x) * standard_deviation(y))
-    return cov
+    covariance = x.cov(y)
+    return covariance
     
-
+# def min_var_port(ticker1, ticker2):
+#     # formula: [ sd(x)^2 - cov(x,y) ] / [ sd(y)^2 + sd(x)^2 - 2 * cov(x, y) ] 
+#     x = yf.download(ticker1, period="max", progress=False)['Adj Close']
+#     y = yf.download(ticker2, period="max", progress=False)['Adj Close']
+#     weight_asset_1 = (standard_deviation(x)**2 - covariance(x, y)) / (standard_deviation(y)**2 - standard_deviation(x**2) - 2 * covariance(x, y))
+#     weight_asset_2 = 1 - weight_asset_1
+#     print(weight_asset_1)
+#     print(weight_asset_2)
+#     return weight_asset_2
     
 
 
@@ -194,6 +202,9 @@ def covariance(x, y) -> float:
 
 def low_risk_port() -> None:
     """A diversified portfolio for an individual with a low risk preference"""
+    # data = yf.download( all tickers data ) ?
+    # for tickers in data:
+        # min_var_port()
 
 def medium_risk_port() -> None:
     """A diversified portfolio for an individual with a medium risk preference"""
